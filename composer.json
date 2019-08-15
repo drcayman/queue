@@ -1,0 +1,26 @@
+{
+  "name": "drcayman/queue",
+  "description": "基于redis的队列",
+  "keywords": [
+    "队列","redis","thinphp","phalapi"
+  ],
+  "license": "GPL-3.0+",
+  "homepage": "http://blog.szwyll.com",
+  "type": "library",
+  "authors": [
+    {
+      "name": "cayman",
+      "email": "dr_cayman@163.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "predis/predis": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "drcayman\\queue\\": "src"
+    }
+  }
+}
