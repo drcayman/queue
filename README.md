@@ -6,7 +6,7 @@
     use drcayman/queue/Lite;
     $config =['scheme'=>'tcp','host' => '127.0.0.1','port' => 6379,'database' => 15];
     $lite = new Lite($config);
-    $lite->rPush($key,$data,$timeout = 0,$task_time = 0);//添加队列 返回队列条数 
+    $lite->rPush($key,$data,$task_time = 0,$timeout = 0);//添加队列 返回队列条数 
     $lite->lPop($key);//取出队列
     $lite->llen($key);//获取队列剩余条数
 

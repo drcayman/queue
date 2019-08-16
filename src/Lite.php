@@ -22,7 +22,7 @@ class Lite
      * @param int $task_time 执行时间 秒数 0 立即执行
      * @return int  返回队列剩余条数
      */
-    public function rPush($key,$data,$timeout = 0,$task_time = 0){
+    public function rPush($key,$data,$task_time = 0,$timeout = 0){
         if(!$timeout) {
             $timeout = $timeout+time();
         }
