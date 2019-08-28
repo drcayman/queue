@@ -31,7 +31,7 @@ class Lite
             'timeout'=>$timeout,
             'task_time'=>$task_time+time()
         ];
-        return $this->client->rpush($key,$data);
+        return $this->client->rpush($key,json_encode($data));
     }
 
     /** 取出队列
@@ -40,6 +40,7 @@ class Lite
      */
     public function lPop($key){
        $data = $this->client->lpop($key);
+       $data = json_decode($data,true);
         if(empty($data)){
             //没数据
             return [];
@@ -48,7 +49,7 @@ class Lite
             if($data['task_time']<=time()){
                 return $data['data'];//到达执行时间
             }
-            return $this->client->rPush($key,$data);//未到达执行时间 重新压入队列
+            return $this->client->rPush($key,json_encode($data));//未到达执行时间 重新压入队列
         }
         return [];
     }
