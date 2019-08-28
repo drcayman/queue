@@ -31,7 +31,7 @@ class Lite
             'timeout'=>$timeout,
             'task_time'=>$task_time+time()
         ];
-        return $this->client->rpushx($key,json_encode($data));
+        return $this->client->rpush($key,[json_encode($data)]);
     }
 
     /** 取出队列
@@ -48,7 +48,7 @@ class Lite
             if($data['task_time']<=time()){
                 return $data['data'];//到达执行时间
             }
-            return $this->client->rpushx($key,json_encode($data));//未到达执行时间 重新压入队列
+            return $this->client->rpush($key,[json_encode($data)]);//未到达执行时间 重新压入队列
         }
         return [];
     }
