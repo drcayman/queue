@@ -23,9 +23,7 @@ class Lite
      * @return int  返回队列剩余条数
      */
     public function rPush($key,$data,$task_time = 0,$timeout = 0){
-        if(!$timeout) {
-            $timeout = $timeout+time();
-        }
+
         $data =[
             'data'=>$data,
             'timeout'=>$timeout,
@@ -44,7 +42,7 @@ class Lite
             //没数据
             return [];
         }
-        if($data['timeout'] <= time() or $data['timeout']==0){//不过期 或者在过期时间之内
+        if($data['timeout'] >= time() or $data['timeout']==0){//不过期 或者在过期时间之内
             if($data['task_time']<=time()){
                 return $data['data'];//到达执行时间
             }
