@@ -42,7 +42,7 @@ class Lite
             //没数据
             return [];
         }
-        if($data['timeout'] >= time() or $data['timeout']==0){//不过期 或者在过期时间之内
+        if($data['timeout'] > time() or $data['timeout']==0){//不过期 或者在过期时间之内
             if($data['task_time']<=time()){
                 return $data['data'];//到达执行时间
             }
