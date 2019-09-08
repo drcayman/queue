@@ -14,7 +14,7 @@ class Lite
         $this->client = new Client($config);
     }
 
-    /** 推送队列
+    /** 推送队列 后面插入
      *  到达过期队列直接扔掉数据 执行时间 到达执行时间才能取出数据
      * @param string $key  队列名
      * @param  array $data   数据
@@ -30,6 +30,24 @@ class Lite
             'task_time'=>$task_time+time()
         ];
         return $this->client->rpush($key,[json_encode($data)]);
+    }
+
+    /** 推送队列 前面插入
+     *  到达过期队列直接扔掉数据 执行时间 到达执行时间才能取出数据
+     * @param string $key  队列名
+     * @param  array $data   数据
+     * @param int $timeout  过期时间 秒数 0 永不过期
+     * @param int $task_time 执行时间 秒数 0 立即执行
+     * @return int  返回队列剩余条数
+     */
+    public function LPush($key,$data,$task_time = 0,$timeout = 0){
+
+        $data =[
+            'data'=>$data,
+            'timeout'=>$timeout,
+            'task_time'=>$task_time+time()
+        ];
+        return $this->client->lpush($key,[json_encode($data)]);
     }
 
     /** 取出队列
