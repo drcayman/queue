@@ -10,8 +10,15 @@ class Lite
      * @param $config array redis 链接信息
      */
     protected  $client;
-    public function __construct($config){
-        $this->client = new Client($config);
+    public function __construct($config,$options = null){
+
+        if(!empty($options)){
+            $this->client = new Client($config,$options);
+        }else{
+            $this->client = new Client($config);
+        }
+
+
     }
 
     /** 推送队列 后面插入
